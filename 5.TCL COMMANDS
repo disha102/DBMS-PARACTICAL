@@ -1,0 +1,53 @@
+-- Create Database
+CREATE DATABASE it_dbms_lab;
+
+-- Use Database
+USE it_dbms_lab;
+
+-- Create Table
+CREATE TABLE Bank_Account (
+    AccNo INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Balance INT
+);
+
+-- Insert Records
+INSERT INTO Bank_Account VALUES
+(101, 'Rahul', 5000),
+(102, 'Sneha', 7000);
+
+-- Display Records
+SELECT * FROM Bank_Account;
+
+-- Start Transaction
+START TRANSACTION;
+
+-- Debit Amount
+UPDATE Bank_Account
+SET Balance = Balance - 1000
+WHERE AccNo = 101;
+
+-- Credit Amount
+UPDATE Bank_Account
+SET Balance = Balance + 1000
+WHERE AccNo = 102;
+
+-- Create Savepoint
+SAVEPOINT transfer_done;
+
+-- Another Update
+UPDATE Bank_Account
+SET Balance = Balance - 500
+WHERE AccNo = 101;
+
+-- Display Records
+SELECT * FROM Bank_Account;
+
+-- Rollback to Savepoint
+ROLLBACK TO transfer_done;
+
+-- Final Save
+COMMIT;
+
+-- Display Final Table
+SELECT * FROM Bank_Account;
