@@ -1,0 +1,37 @@
+-- Create Database
+CREATE DATABASE employee_db;
+
+-- Use Database
+USE employee_db;
+
+-- Create Table
+CREATE TABLE Employee (
+    EmpID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Salary INT
+);
+
+-- Create Trigger
+DELIMITER //
+
+CREATE TRIGGER Default_Salary
+BEFORE INSERT
+ON Employee
+FOR EACH ROW
+BEGIN
+    IF NEW.Salary IS NULL THEN
+        SET NEW.Salary = 25000;
+    END IF;
+END //
+
+DELIMITER ;
+
+-- Insert Records
+INSERT INTO Employee VALUES
+(1, 'Rahul', 40000);
+
+INSERT INTO Employee VALUES
+(2, 'Sneha', NULL);
+
+-- Display Table
+SELECT * FROM Employee;
