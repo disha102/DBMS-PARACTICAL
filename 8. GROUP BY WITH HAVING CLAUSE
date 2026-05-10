@@ -1,0 +1,33 @@
+-- Create Database
+CREATE DATABASE college_db;
+
+-- Use Database
+USE college_db;
+
+-- Create Table
+CREATE TABLE Student_Result (
+    RollNo INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Department VARCHAR(30),
+    Marks INT
+);
+
+-- Insert Records
+INSERT INTO Student_Result VALUES
+(1, 'Rahul', 'IT', 85),
+(2, 'Sneha', 'IT', 78),
+(3, 'Amit', 'COMP', 92),
+(4, 'Pooja', 'COMP', 60),
+(5, 'Riya', 'ENTC', 88),
+(6, 'Karan', 'ENTC', 72);
+
+-- Display Table
+SELECT * FROM Student_Result;
+
+-- Query using GROUP BY and HAVING
+SELECT Department,
+AVG(Marks) AS Average_Marks
+FROM Student_Result
+WHERE Marks >= 70
+GROUP BY Department
+HAVING AVG(Marks) > 75;
